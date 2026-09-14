@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.log
+
+# Large model artifacts from Teammate 1 - track via Git LFS or a release,
+# not a normal commit, once they're ready.
+model/gesture_model.keras
