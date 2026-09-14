@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Language Recognition</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Socket.IO Client -->
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Real-Time Sign Language Translator</h1>
+      <div id="light-warning" class="warning-banner hidden">
+        ⚠️ Low ambient lighting detected. Please increase room brightness.
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <!-- Video Section -->
+      <section class="video-panel">
+        <div class="video-wrapper">
+          <video id="webcam" autoplay playsinline muted></video>
+          <!-- Hidden canvas for downscaling and lux calculation -->
+          <canvas id="capture-canvas" width="480" height="360" style="display: none;"></canvas>
+        </div>
+        
+        <div class="status-bar">
+          <span>Status: <strong id="connection-status">Connecting...</strong></span>
+          <span>FPS: <strong id="fps-counter">0</strong></span>
+        </div>
+      </section>
+
+      <!-- Output Section -->
+      <section class="output-panel">
+        <div class="card">
+          <h2>Live Prediction</h2>
+          <div class="prediction-box">
+            <span id="predicted-word">Waiting for gesture...</span>
+          </div>
+          <div class="confidence-container">
+            <label>Confidence: <span id="confidence-value">0%</span></label>
+            <div class="progress-bar">
+              <div id="confidence-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Sentence Buffer</h2>
+          <div id="sentence-buffer" class="sentence-box"></div>
+          <button id="clear-btn" class="btn">Clear Sentence</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
